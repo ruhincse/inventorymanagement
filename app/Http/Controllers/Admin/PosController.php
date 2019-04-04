@@ -145,7 +145,7 @@ class PosController extends Controller
         $data['order_date']=date('d_m_Y');       
         $data['sub_total']=Cart::subtotal();   
         $data['total']=$request->total;
-        $data['payment_type']=$request->payment_type;        
+       
         $data['pay']=$request->payment;
         $data['due']=$request->due;
 
@@ -169,12 +169,43 @@ class PosController extends Controller
                     Orderdetails::create($orders);         
             }
 
+            Cart::destroy();
+
 
             Toastr::success('Order Confirmed Please Provide the Product ',"ordered Confirmed");
             return redirect()->route('admin.dashboard');
                
 
        
+
+    }
+
+    public function pendingorder(){
+         $order=Order::where('order_status','pending')->latest()->get();
+
+        return view('admin.pendingorder',compact('order'));
+
+    }
+
+    public function paidorder($id){
+
+          $order=Order::where('id',$id)->first();           
+            $total=$order->total;
+            $order->order_status="confirm";
+            $order->pay=$total;
+            $order->due=0;
+            $order->save();
+            Toastr::success('Payment Successfully Done',"Payment");
+            return redirect()->back();
+
+    }
+
+    public function allorder(){
+
+         $order=Order::latest()->get();   
+
+           return view('admin.allproduct',compact('order'));        
+
 
     }
 }

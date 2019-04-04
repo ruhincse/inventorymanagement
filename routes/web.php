@@ -58,6 +58,9 @@ Route::group(['as'=>"admin.",'prefix'=>'admin','namespace'=>'admin', 'middleware
 	Route::get('cartcustomer/{id}','PosController@customerid')->name('find.customer');
 
 	Route::post('order','PosController@order')->name('create.order');
+	Route::get('pendingorder','PosController@pendingorder')->name('order.pending');
+	Route::get('paid/{id}','PosController@paidorder')->name('order.paid');
+	Route::get('allpending','PosController@allorder')->name('allorder');
 
 
 

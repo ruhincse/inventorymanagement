@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Order;
 
 class AdminController extends Controller
 {
@@ -14,7 +15,13 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return  view('admin.index');
+        $data=Order::where('order_status','pending')->get();
+        $date=date("d_m_Y");
+        
+        $todayOrder=Order::where('order_date',$date)->get();
+        $amounts=Order::sum('total');       
+        $total_due=Order::sum('due');       
+        return  view('admin.index',compact('data','todayOrder','amounts','total_due'));
     }
 
     /**

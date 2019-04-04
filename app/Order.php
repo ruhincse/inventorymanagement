@@ -8,5 +8,11 @@ class Order extends Model
 {
     	protected $fillable=['customer_id','order_date','total_products','sub_total','total','payment_type','pay','due'];
 
+
+
+    	public function customer(){
+    	return $this->belongsTo('App\Customer');
+    }
+
     									
 }

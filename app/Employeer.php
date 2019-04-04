@@ -9,4 +9,7 @@ class Employeer extends Model
    public function attendances(){
    	return $this->hasMany('App\Attandance','user_id');
    }
+
+
+   
 }

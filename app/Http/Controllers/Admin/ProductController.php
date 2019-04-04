@@ -116,7 +116,9 @@ class ProductController extends Controller
 
         ]);
 
-        $product=Product::find($id);       
+        $product=Product::find($id);
+
+             
 
         $product->category_id=$request->category;
         $product->subcategory_id=$request->subcat;

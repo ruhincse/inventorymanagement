@@ -137,6 +137,23 @@
                     </li>
 
 
+                    <li class="{{Request::is('admin/pendingorder*')?'active':''}}">
+                        <a href="{{route('admin.order.pending')}}">
+                            <i class="material-icons">transfer_within_a_station</i>
+                            <span>Pending Order</span>
+                        </a>
+                    </li>
+
+                     <li class="{{Request::is('admin/allproduct*')?'active':''}}">
+                        <a href="{{route('admin.allorder')}}">
+                            <i class="material-icons">shop</i>
+                            <span>All Order</span>
+                        </a>
+                    </li>
+
+
+
+
 
                         <li class="header">System </li>
 
