@@ -9,6 +9,8 @@ use App\Customer;
 use App\Category;
 use App\Subcategory;
 use App\Product;
+use App\Order;
+use App\Orderdetails;
 use Cart;
 
 class PosController extends Controller
@@ -57,9 +59,12 @@ class PosController extends Controller
     	]);
 
     	$product=Product::where('id',$request->products)->first();
+
+        print_r($product);
+        
     	
         $data=[
-        	'id'=>$request->products,
+        	'id'=>$product->id,
         	'name'=>$product->product_name,
         	'qty'=>$request->qty,
         	'price'=>$request->pricex,
@@ -67,7 +72,12 @@ class PosController extends Controller
 
         ];  
     
-       Cart::add($data);  	
+       Cart::add($data);  
+        /*$data=Cart::content();
+       echo "<pre>";
+       print_r($data);	
+       echo "</pre>";   
+       exit; */
     	Toastr::success('Cart successfully added',"added");
     	return redirect()->route('admin.pos');
     	
@@ -110,10 +120,61 @@ class PosController extends Controller
 
         $customer=Customer::where('id',$id)->first();
         $cart=Cart::content();
-       return view('admin.invoice',compact('customer'));
+        $sl=1;
+       return view('admin.invoice',compact('customer','sl'));
     }
 
     public function customerid($id){
         return $id;
+    }
+
+
+    public function order(Request $request){
+                $request->validate([
+                'customer_id'=>'required',
+                'payment_type'=>'required',
+                'total'=>'required',
+                'payment'=>'required',
+                'due'=>'required',
+        ]);
+ 
+        $data['customer_id']=$request->customer_id;
+        $data['order_status']='pending';
+        $data['payment_type']=$request->payment_type;
+        $data['total_products']=Cart::count();
+        $data['order_date']=date('d_m_Y');       
+        $data['sub_total']=Cart::subtotal();   
+        $data['total']=$request->total;
+        $data['payment_type']=$request->payment_type;        
+        $data['pay']=$request->payment;
+        $data['due']=$request->due;
+
+            $order=Order::create($data);
+            $order_id=$order->id;
+
+               // Attandance::create($data);
+
+            $data=Cart::content();
+
+         //  print_r($data);
+          // exit;
+
+         //   qty price   total
+            foreach ($data as $datas) {
+                    $orders['order_id']=$order_id;
+                    $orders['product_id']=$datas->id;
+                    $orders['qty']=$datas->qty;
+                    $orders['price']=$datas->price;
+                    $orders['total']=$datas->price*$datas->qty;
+                    Orderdetails::create($orders);         
+            }
+
+
+            Toastr::success('Order Confirmed Please Provide the Product ',"ordered Confirmed");
+            return redirect()->route('admin.dashboard');
+               
+
+       
+
     }
 }

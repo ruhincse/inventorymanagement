@@ -57,6 +57,8 @@ Route::group(['as'=>"admin.",'prefix'=>'admin','namespace'=>'admin', 'middleware
 	Route::post('createinvoice','PosController@invoice')->name('create.invoice');
 	Route::get('cartcustomer/{id}','PosController@customerid')->name('find.customer');
 
+	Route::post('order','PosController@order')->name('create.order');
+
 
 
 

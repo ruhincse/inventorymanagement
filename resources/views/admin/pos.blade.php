@@ -161,7 +161,7 @@
                                <h3>Sub Total = {{Cart::total()}} </h3>
                                <input type="hidden" name="custs_id" id='cust_id'>
 
-                      <button type="submit" class="btn btn-danger">Create Invoice</button>
+                      <button type="submit" class="btn btn-danger" >Create Invoice</button>
                       </form> 
 
                                 </div>

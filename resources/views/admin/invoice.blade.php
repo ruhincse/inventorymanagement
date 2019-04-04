@@ -59,18 +59,16 @@
                                                         <thead>
                                                             <tr><th>#</th>
                                                             <th>Item</th>
-                                                            <th>Description</th>
                                                             <th>Quantity</th>
                                                             <th>Unit Cost</th>
                                                             <th>Total</th>
                                                         </tr></thead>
                                                         <tbody>
 
-                                                        	@foreach(Cart::content() as $carts)
+                                                        	@foreach(Cart::content() as $key=> $carts)
                                                             <tr>
-                                                                <td>1</td>
-                                                                <td>{{$carts->name}}</td>
-                                                                <td>Lorem ipsum dolor sit amet.</td>
+                                                                <td>{{ $sl++}}</td>
+                                                                <td>{{$carts->name}}</td>          
                                                                 <td>{{$carts->qty}}</td>
                                                                 <td>{{$carts->price}}</td>
                                                                 <td>{{$carts->price * $carts->qty}}</td>
@@ -94,7 +92,7 @@
                                         <div class="hidden-print">
                                             <div class="pull-right">
                                                 <a href="#" onclick="window.print()" class="btn btn-inverse waves-effect waves-light"><i class="fa fa-print"></i></a>
-                                                <a href="#" class="btn btn-success waves-effect waves-light">Submit</a>
+                                                <a href="#" class="btn btn-success waves-effect waves-light" data-toggle="modal" data-target="#exampleModal">Submit</a>
                                             </div>
                                         </div>
                                     </div>
@@ -107,6 +105,83 @@
 
 </div>
 </section>
+
+
+<!-- Model-->
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Payment Method</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+       <form action="{{route('admin.create.order')}}" method="POST" enctype="multipart/form-data">
+      <div class="modal-body">
+       
+
+        @csrf
+
+           <input type="hidden" class="form-control" name="customer_id" value="{{$customer->id}}">  
+          <div class="form-group">
+            <label for="exampleFormControlInputd">Payment Type</label>
+             <div class="form-line">
+                  <select  name="payment_type" >
+                    
+                    <option value="hadncash">Hadncash</option>
+                    <option value="check">check</option>
+                    <option value="due">Due</option>
+
+                  </select>
+              
+          </div>
+            </div>
+
+
+       
+
+
+          <div class="form-group">
+            <label for="exampleFormControlInputg">Total</label>
+             <div class="form-line">
+            <input type="text" class="form-control" id="exampleFormControlInputg" name="total" value="{{Cart::total()}}">
+          </div>
+            </div>
+
+
+          <div class="form-group">
+            <label for="exampleFormControlInputg">Payment</label>
+             <div class="form-line">
+            <input type="text" class="form-control" id="exampleFormControlInputg" name="payment" value="{{Cart::total()}}">
+          </div>
+            </div>
+
+
+
+          <div class="form-group">
+            <label for="exampleFormControlInputg">Due</label>
+             <div class="form-line">
+            <input type="text" class="form-control" id="exampleFormControlInputg" name="due" value="">
+          </div>
+            </div>
+
+
+    
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Order Submit </button>
+      </div>
+
+      
+
+       </form>
+    </div>
+  </div>
+</div>
 
 
 

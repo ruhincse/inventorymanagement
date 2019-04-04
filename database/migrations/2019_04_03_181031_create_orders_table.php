@@ -17,10 +17,11 @@ class CreateOrdersTable extends Migration
             $table->bigIncrements('id');
             $table->string('customer_id');
             $table->string('order_date');
-            $table->string('order_status');
+            $table->string('order_status')->default('pending');
             $table->string('total_products');
             $table->string('sub_total');
-            $table->string('payment_status');
+            $table->string('total');
+            $table->string('payment_type');
             $table->string('pay');
             $table->string('due');
             $table->timestamps();

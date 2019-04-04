@@ -59,7 +59,7 @@ class SalaryController extends Controller
                         ->first();
 
 
-                        print_r($salary);
+                       // print_r($salary);
                       
 
                         if(!$salary){
