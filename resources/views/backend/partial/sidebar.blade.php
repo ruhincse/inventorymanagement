@@ -174,6 +174,14 @@
                             </li>
 
 
+                             <li class="{{Request::is('admin/setting*')?'active':''}}">
+                        <a href="{{route('admin.setting.index')}}">
+                            <i class="material-icons">lock</i>
+                            <span>Change Information</span>
+                        </a>
+                    </li>
+
+
                 </ul>
             </div>
 

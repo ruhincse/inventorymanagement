@@ -66,6 +66,9 @@ Route::group(['as'=>"admin.",'prefix'=>'admin','namespace'=>'Admin', 'middleware
 	Route::get('paid/{id}','PosController@paidorder')->name('order.paid');
 	Route::get('allpending','PosController@allorder')->name('allorder');
 
+//setting Route
+
+	Route::resource('setting','SettingController');
 
 
 
