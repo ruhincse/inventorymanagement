@@ -18,7 +18,7 @@
 
       <div class="container-fluid">
           <button type="submit" class="btn btn-primary " data-toggle="modal" data-target="#exampleModal"> Add Customer</button> <br/> <br/> <br/> 
-          <form action="{{route('admin.product.store')}}" method="post">
+          <form action="{{route('admin.product.stores')}}" method="post">
             @csrf
 
            <table class="table table-bordered table-striped table-hover dataTable js-exportable">

@@ -63,7 +63,7 @@
                                         @foreach($order as $key=> $data)
                                         <tr>
                                             <td>{{$key+1}}</td>
-                                            <td>{{$data->customer->name}}</td>
+                                            <td>{{$data->customer->id}}</td>
                                             <td>{{$data->order_date}}</td>
                                             <td>{{$data->total}}</td>
                                             <td>{{$data->due}}</td>

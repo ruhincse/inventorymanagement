@@ -16,10 +16,14 @@ Auth::routes();
 
 //Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/',function(){
+	return redirect()->route('admin.dashboard');
+});
+
 
 //admin Route
 
-Route::group(['as'=>"admin.",'prefix'=>'admin','namespace'=>'admin', 'middleware'=>['auth','admin'] ], function(){
+Route::group(['as'=>"admin.",'prefix'=>'admin','namespace'=>'Admin', 'middleware'=>['auth','admin'] ], function(){
 	Route::get('dashboard','AdminController@index')->name('dashboard');
 	Route::resource('employee','EmployeerController');
 	Route::resource('customer','CustomerController');
@@ -50,7 +54,7 @@ Route::group(['as'=>"admin.",'prefix'=>'admin','namespace'=>'admin', 'middleware
 	Route::get('ssubcat/{id}','PosController@subcat');
 	Route::get('searchproduct/{id}','PosController@searchproduct');
 	Route::get('prices/{id}','PosController@productprice');
-	Route::post('create','PosController@store')->name('product.store');
+	Route::post('create','PosController@store')->name('product.stores');
 	Route::get('updatecart/{id}/{qty}','PosController@updatepos')->name('pos.update');
 
 	Route::get('cartremove/{id}','PosController@removecart')->name('cart.remove');

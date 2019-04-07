@@ -181,7 +181,7 @@ class PosController extends Controller
     }
 
     public function pendingorder(){
-         $order=Order::where('order_status','pending')->latest()->get();
+             $order=Order::where('order_status','pending')->latest()->get();
 
         return view('admin.pendingorder',compact('order'));
 
