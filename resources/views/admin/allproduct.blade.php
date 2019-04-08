@@ -63,6 +63,8 @@
                                         @foreach($order as $key=> $data)
                                         <tr>
                                             <td>{{$key+1}}</td>
+
+
                                             <td> @php 
                                                 $id=$data->customer_id;
                                                     $user=DB::table('customers')
@@ -73,6 +75,8 @@
 
 
                                                 {{$user->name}}</td>
+
+                                                
                                             <td>{{$data->order_date}}</td>
                                             <td>{{$data->total}}</td>
                                             <td>{{$data->due}}</td>
